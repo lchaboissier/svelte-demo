@@ -1,30 +1,16 @@
 <script>
     import { page } from '$app/stores';
     import Card from '$lib/components/Card.svelte';
+    import recipesStore, { getRecipe } from '$lib/stores/recipes'; // Importer le store
+    import { onMount } from 'svelte'; // Permet d'effectuer des actions à l'initialisation du composant
 
-    const produits = [
-        {
-            id: 1,
-            titre: "Produit 1",
-            description: "Description du produit 1",
-            image: "https://picsum.photos/300/200?random=1"
-        },
-        {
-            id: 2,
-            titre: "Produit 2",
-            description: "Description du produit 2",
-            image: "https://picsum.photos/300/200?random=2"
-        },
-        {
-            id: 3,
-            titre: "Produit 3",
-            description: "Description du produit 3",
-            image: "https://picsum.photos/300/200?random=3"
-        }
-    ];
+    // Charger les recipes à l'initialisation
+    onMount(() => {
+        getRecipe(); // Charge les données API dans le store
+    });
 </script>
 
-<nav>
+<nav class="align-text-center">
     <ul>
         <li class:active={$page.url.pathname === '/'}>
             <a href="/">Accueil</a>
@@ -38,25 +24,37 @@
     </ul>
 </nav>
 
-<h1>Nos produits</h1>
+<h1>Nos recettes</h1>
 
 <div class="grid">
-    {#each produits as produit}
-        <Card
-                titre={produit.titre}
-                description={produit.description}
-                image={produit.image}
-        >
-            <svelte:fragment slot="actions">
-                <a href={`/produit/${produit.id}`}>
-                    <button>Voir détails</button>
-                </a>
-            </svelte:fragment>
-        </Card>
-    {/each}
+    {#if $recipesStore.length > 0}
+        {#each $recipesStore as recipe}
+            <Card
+                    titre={recipe.name}
+                    description={recipe.description}
+                    image={recipe.image || 'https://cdn-icons-png.flaticon.com/512/4936/4936882.png'}
+            >
+                <svelte:fragment slot="actions">
+                    <a href={`/recipe/${recipe.id}`}>
+                        <button>Voir détails</button>
+                    </a>
+                </svelte:fragment>
+            </Card>
+        {/each}
+    {:else}
+        <p>Chargement des recipes...</p>
+    {/if}
 </div>
 
 <style>
+    h1 {
+        font-size: xxx-large;
+    }
+
+    .align-text-center {
+        text-align: center;
+    }
+
     .grid {
         display: grid;
         grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));

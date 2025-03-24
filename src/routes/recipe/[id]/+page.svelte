@@ -1,7 +1,14 @@
 <script>
+    import { onMount } from 'svelte';
+    import recipeStore, { getRecipeById } from '$lib/stores/recipes';
     import { page } from '$app/stores';
 
     let id = $page.params.id; // ID de la recette depuis l'URL
+    let recipe;
+
+    onMount(async () => {
+        recipe = await getRecipeById(id); // Récupérer la recette par ID
+    });
 </script>
 
 <nav class="align-content-center">
@@ -17,9 +24,6 @@
         </li>
     </ul>
 </nav>
-
-<h1>Contact</h1>
-<p>Vous pouvez nous contacter à contact@exemple.fr</p>
 
 <style>
     h1 {
