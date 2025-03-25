@@ -1,6 +1,6 @@
 <script>
     import { onMount } from 'svelte';
-    import recipeStore, { getRecipeById } from '$lib/stores/recipes';
+    import { getRecipeById } from '$lib/stores/recipes';
     import { page } from '$app/stores';
 
     let id = $page.params.id; // ID de la recette depuis l'URL
@@ -11,8 +11,8 @@
     });
 </script>
 
-<nav class="align-content-center">
-    <ul>
+<nav>
+    <ul class="align-content-center">
         <li class:active={$page.url.pathname === '/'}>
             <a href="/">Accueil</a>
         </li>

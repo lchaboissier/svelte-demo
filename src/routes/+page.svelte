@@ -10,8 +10,8 @@
     });
 </script>
 
-<nav class="align-text-center">
-    <ul>
+<nav>
+    <ul class="align-content-center">
         <li class:active={$page.url.pathname === '/'}>
             <a href="/">Accueil</a>
         </li>
@@ -24,7 +24,7 @@
     </ul>
 </nav>
 
-<h1>Nos recettes</h1>
+<h1 class="align-text-center">Nos recettes</h1>
 
 <div class="grid">
     {#if $recipesStore.length > 0}
@@ -51,14 +51,19 @@
         font-size: xxx-large;
     }
 
+    .align-content-center {
+        justify-content: center;
+    }
+
     .align-text-center {
         text-align: center;
     }
 
     .grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-        gap: 1em;
+        display: flex; /* Utiliser flexbox pour plus de contrôle */
+        flex-wrap: wrap; /* Permet le retour à la ligne des éléments si nécessaire */
+        justify-content: center; /* Centre horizontalement tout le contenu */
+        gap: 1px; /* Gère l'espacement entre les cartes */
     }
 
     nav {

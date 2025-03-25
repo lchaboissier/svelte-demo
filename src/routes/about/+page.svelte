@@ -18,8 +18,8 @@
     </ul>
 </nav>
 
-<h1>À propos</h1>
-<p>Cette page présente des informations sur notre application.</p>
+<h1 class="align-text-center">À propos</h1>
+<p class="align-text-center">Cette page présente des informations sur notre application.</p>
 
 <style>
     h1 {
@@ -28,6 +28,10 @@
 
     .align-content-center {
         justify-content: center;
+    }
+
+    .align-text-center {
+        text-align: center;
     }
 
     .grid {

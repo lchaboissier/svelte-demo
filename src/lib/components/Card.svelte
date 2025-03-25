@@ -25,8 +25,10 @@
         border: 1px solid #ddd;
         border-radius: 8px;
         overflow: hidden;
-        margin-bottom: 1em;
+        /*margin-bottom: 1em;*/
         box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        margin: 0 auto 1em auto;
+        max-width: 300px;
     }
 
     img {
